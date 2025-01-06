@@ -1,7 +1,7 @@
-import { Driver } from 'src/core/driver/driver.entity';
-import * as driversData from './drivers.json';
 import { Injectable } from '@nestjs/common';
+import { Driver } from 'src/core/driver/driver.entity';
 import { DriverRepository } from 'src/core/driver/driver.repository';
+import * as driversData from './drivers.json';
 
 @Injectable()
 export class DriverRepositoryInMemory implements DriverRepository {
