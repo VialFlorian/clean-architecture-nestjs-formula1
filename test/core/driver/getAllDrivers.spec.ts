@@ -1,8 +1,10 @@
+import { mock } from 'jest-mock-extended';
+import { DriverRepository } from 'src/core/driver/driver.repository';
 import { GetAllDriversUsecase } from 'src/core/driver/usecase/getAllDrivers';
 import { driverFactory } from 'test/__fixture__/driver/entity';
 
 const setup = () => {
-  const driverRepository = { find: jest.fn(), findAll: jest.fn() };
+  const driverRepository = mock<DriverRepository>();
   const usecase = new GetAllDriversUsecase(driverRepository);
   return { usecase, params: { driverRepository } };
 };
