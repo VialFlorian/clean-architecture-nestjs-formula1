@@ -26,6 +26,7 @@ describe('DriverRepositoryInMemory', () => {
 
     // Then
     expect(result).toEqual({
+      code: 'HAM',
       firstName: 'Lewis',
       lastName: 'Hamilton',
       dateOfBirth: '1985-01-07',

@@ -9,6 +9,7 @@ const generateRandomNationality = () =>
   getRandomValueFromArray(['French', 'Thai', 'Spanish', 'British']);
 
 export const driverFactory = Factory.define<Driver>(() => ({
+  code: generateRandomString(3),
   firstName: generateRandomString(),
   lastName: generateRandomString(),
   dateOfBirth: generateRandomStringDate(),

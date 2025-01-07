@@ -23,6 +23,7 @@ describe('DriverController', () => {
 
   it('/driver/LEC', () => {
     return request(app.getHttpServer()).get('/driver/LEC').expect(200).expect({
+      code: 'LEC',
       firstName: 'Charles',
       lastName: 'Leclerc',
       dateOfBirth: '1997-10-16',

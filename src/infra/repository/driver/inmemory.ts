@@ -15,6 +15,7 @@ export class DriverRepositoryInMemory implements DriverRepository {
     if (!driver) return null;
 
     return Promise.resolve({
+      code: driver.code,
       firstName: driver.givenName,
       lastName: driver.familyName,
       dateOfBirth: driver.dateOfBirth,
@@ -25,6 +26,7 @@ export class DriverRepositoryInMemory implements DriverRepository {
   findAll(): Promise<Driver[]> {
     return Promise.resolve(
       this.data.MRData.DriverTable.Drivers.map((driver) => ({
+        code: driver.code,
         firstName: driver.givenName,
         lastName: driver.familyName,
         dateOfBirth: driver.dateOfBirth,
