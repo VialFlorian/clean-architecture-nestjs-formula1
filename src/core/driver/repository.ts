@@ -1,4 +1,4 @@
-import { Driver } from '../driver/driver.entity';
+import { Driver } from './entity';
 
 export abstract class DriverRepository {
   abstract findAll(): Promise<Driver[]>;

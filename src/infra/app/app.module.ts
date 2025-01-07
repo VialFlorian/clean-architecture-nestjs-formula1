@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { DriverModule } from './driver/driver.module';
+import { DriverModule } from './driver/module';
 
 @Module({
   imports: [DriverModule],

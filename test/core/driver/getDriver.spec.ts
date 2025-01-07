@@ -1,5 +1,5 @@
 import { mock } from 'jest-mock-extended';
-import { DriverRepository } from 'src/core/driver/driver.repository';
+import { DriverRepository } from 'src/core/driver/repository';
 import { GetDriverUsecase } from 'src/core/driver/usecase/getDriver';
 import { driverFactory } from 'test/__fixture__/driver/entity';
 

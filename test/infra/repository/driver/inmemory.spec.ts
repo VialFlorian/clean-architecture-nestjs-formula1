@@ -1,4 +1,4 @@
-import { DriverRepositoryInMemory } from 'src/infra/repository/driver/driver.repository.inmemory';
+import { DriverRepositoryInMemory } from 'src/infra/repository/driver/inmemory';
 
 const setup = () => {
   const repository = new DriverRepositoryInMemory();

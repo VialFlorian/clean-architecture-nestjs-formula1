@@ -1,5 +1,5 @@
 import { Factory } from 'fishery';
-import { Driver } from 'src/core/driver/driver.entity';
+import { Driver } from 'src/core/driver/entity';
 import { generateRandomString, getRandomValueFromArray } from '../utils';
 
 const generateRandomStringDate = () =>

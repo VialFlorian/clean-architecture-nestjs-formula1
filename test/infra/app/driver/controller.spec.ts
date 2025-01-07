@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { DriverModule } from 'src/infra/app/driver/driver.module';
+import { DriverModule } from 'src/infra/app/driver/module';
 import * as request from 'supertest';
 
 describe('DriverController', () => {
