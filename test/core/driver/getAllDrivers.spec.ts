@@ -1,4 +1,4 @@
-import { GetAllDriversUsecase } from 'src/core/driver/getAllDrivers.usecase';
+import { GetAllDriversUsecase } from 'src/core/driver/usecase/getAllDrivers';
 import { driverFactory } from 'test/__fixture__/driver/entity';
 
 const setup = () => {

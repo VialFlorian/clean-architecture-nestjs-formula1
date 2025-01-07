@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DriverRepository } from 'src/core/driver/driver.repository';
-import { GetAllDriversUsecase } from 'src/core/driver/getAllDrivers.usecase';
+import { GetAllDriversUsecase } from 'src/core/driver/usecase/getAllDrivers';
 import { DriverRepositoryInMemory } from 'src/infra/repository/driver/driver.repository.inmemory';
 import { DriverController } from './driver.controller';
 

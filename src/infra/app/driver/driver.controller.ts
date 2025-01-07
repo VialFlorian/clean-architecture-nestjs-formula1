@@ -1,5 +1,5 @@
 import { Controller, Get, Inject } from '@nestjs/common';
-import { GetAllDriversUsecase } from 'src/core/driver/getAllDrivers.usecase';
+import { GetAllDriversUsecase } from 'src/core/driver/usecase/getAllDrivers';
 
 @Controller('driver')
 export class DriverController {
