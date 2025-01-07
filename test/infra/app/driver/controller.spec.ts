@@ -14,14 +14,14 @@ describe('DriverController', () => {
     await app.init();
   });
 
-  it('/driver', () => {
+  it('GET /driver', () => {
     return request(app.getHttpServer())
       .get('/driver')
       .expect(200)
       .expect((response) => expect(response.body).toHaveLength(24));
   });
 
-  it('/driver/LEC', () => {
+  it('GET /driver/LEC', () => {
     return request(app.getHttpServer()).get('/driver/LEC').expect(200).expect({
       code: 'LEC',
       firstName: 'Charles',
@@ -29,5 +29,18 @@ describe('DriverController', () => {
       dateOfBirth: '1997-10-16',
       nationality: 'Monegasque',
     });
+  });
+
+  it('POST /driver', () => {
+    return request(app.getHttpServer())
+      .post('/driver')
+      .send({
+        code: 'FVI',
+        firstName: 'Florian',
+        lastName: 'VIAL',
+        dateOfBirth: '1995-09-28',
+        nationality: 'French',
+      })
+      .expect(201);
   });
 });

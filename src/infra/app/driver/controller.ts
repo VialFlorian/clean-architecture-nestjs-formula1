@@ -1,6 +1,8 @@
-import { Controller, Get, Inject, Param } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import { AddDriverUsecase } from 'src/core/driver/usecase/addDriver';
 import { GetAllDriversUsecase } from 'src/core/driver/usecase/getAllDrivers';
 import { GetDriverUsecase } from 'src/core/driver/usecase/getDriver';
+import { AddDriverDto } from './input.dto';
 
 @Controller('driver')
 export class DriverController {
@@ -9,6 +11,8 @@ export class DriverController {
     private readonly getAllDriversUsecase: GetAllDriversUsecase,
     @Inject('GetDriverUsecase')
     private readonly getDriverUsecase: GetDriverUsecase,
+    @Inject('AddDriverUsecase')
+    private readonly addDriverUsecase: AddDriverUsecase,
   ) {}
 
   @Get()
@@ -19,5 +23,10 @@ export class DriverController {
   @Get(':id')
   getDriver(@Param('id') code: string) {
     return this.getDriverUsecase.execute(code);
+  }
+
+  @Post()
+  addDriver(@Body() driver: AddDriverDto) {
+    return this.addDriverUsecase.execute(driver);
   }
 }
