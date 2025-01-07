@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Driver } from 'src/core/driver/driver.entity';
 import { DriverRepository } from 'src/core/driver/driver.repository';
-import * as driversData from './drivers.json';
+import * as data from './drivers.json';
 
 @Injectable()
 export class DriverRepositoryInMemory implements DriverRepository {
+  private data = data;
+
   find(code: string): Promise<Driver> {
-    const driver = driversData.MRData.DriverTable.Drivers.find(
+    const driver = this.data.MRData.DriverTable.Drivers.find(
       (driver) => driver.code === code,
     );
 
@@ -22,7 +24,7 @@ export class DriverRepositoryInMemory implements DriverRepository {
 
   findAll(): Promise<Driver[]> {
     return Promise.resolve(
-      driversData.MRData.DriverTable.Drivers.map((driver) => ({
+      this.data.MRData.DriverTable.Drivers.map((driver) => ({
         firstName: driver.givenName,
         lastName: driver.familyName,
         dateOfBirth: driver.dateOfBirth,
