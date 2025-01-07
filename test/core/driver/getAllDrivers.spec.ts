@@ -2,7 +2,7 @@ import { GetAllDriversUsecase } from 'src/core/driver/usecase/getAllDrivers';
 import { driverFactory } from 'test/__fixture__/driver/entity';
 
 const setup = () => {
-  const driverRepository = { findAll: jest.fn() };
+  const driverRepository = { find: jest.fn(), findAll: jest.fn() };
   const usecase = new GetAllDriversUsecase(driverRepository);
   return { usecase, params: { driverRepository } };
 };
