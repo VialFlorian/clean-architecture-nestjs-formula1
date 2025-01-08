@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Inject,
+  Param,
+  Post,
+} from '@nestjs/common';
+import { throwHttpException } from '../http.helper';
 import { AddDriverDto } from './input.dto';
 import { DriverUsecases } from './module';
 
@@ -10,17 +19,24 @@ export class DriverController {
   ) {}
 
   @Get()
+  @HttpCode(200)
   getAllDrivers() {
-    return this.usecases.getAllDrivers.execute().getOrThrow();
+    return this.usecases.getAllDrivers.execute().getOrElse(throwHttpException);
   }
 
   @Get(':id')
-  getDriver(@Param('id') code: string) {
-    return this.usecases.getDriver.execute(code).getOrThrow();
+  @HttpCode(200)
+  async getDriver(@Param('id') code: string) {
+    return (await this.usecases.getDriver.execute(code)).getOrElse(
+      throwHttpException,
+    );
   }
 
   @Post()
+  @HttpCode(201)
   addDriver(@Body() driver: AddDriverDto) {
-    return this.usecases.addDriver.execute(driver).getOrThrow();
+    return this.usecases.addDriver
+      .execute(driver)
+      .getOrElse(throwHttpException);
   }
 }

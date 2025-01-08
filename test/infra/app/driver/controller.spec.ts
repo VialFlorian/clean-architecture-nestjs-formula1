@@ -21,13 +21,28 @@ describe('DriverController', () => {
       .expect((response) => expect(response.body).toHaveLength(24));
   });
 
-  it('GET /driver/LEC', () => {
-    return request(app.getHttpServer()).get('/driver/LEC').expect(200).expect({
-      code: 'LEC',
-      firstName: 'Charles',
-      lastName: 'Leclerc',
-      dateOfBirth: '1997-10-16',
-      nationality: 'Monegasque',
+  describe('GET /driver/:code', () => {
+    it('should return 200 statusCode', () => {
+      return request(app.getHttpServer())
+        .get('/driver/LEC')
+        .expect(200)
+        .expect({
+          code: 'LEC',
+          firstName: 'Charles',
+          lastName: 'Leclerc',
+          dateOfBirth: '1997-10-16',
+          nationality: 'Monegasque',
+        });
+    });
+
+    it('should return 404 statusCode', () => {
+      return request(app.getHttpServer())
+        .get('/driver/DoesNotExist')
+        .expect(404)
+        .expect({
+          statusCode: 404,
+          message: 'Not Found',
+        });
     });
   });
 
