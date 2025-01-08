@@ -9,10 +9,9 @@ export class GetAllDriversUsecase {
     return Result.try(
       () => this.driverRepository.findAll(),
       (error) =>
-        new UnexpectedError(
-          'something went wrong during GetAllDriversUsecase execution',
-          { cause: error },
-        ),
+        new UnexpectedError('something went wrong during GetAllDriversUsecase execution', {
+          cause: error,
+        }),
     );
   }
 }

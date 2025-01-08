@@ -19,11 +19,7 @@ describe('DriverController', () => {
     return request(app.getHttpServer())
       .get('/driver')
       .expect(200)
-      .expect((response) =>
-        expect(response.header['cache-control']).toEqual(
-          `max-age=${DURATION.ONE_HOUR}`,
-        ),
-      )
+      .expect((response) => expect(response.header['cache-control']).toEqual(`max-age=${DURATION.ONE_HOUR}`))
       .expect((response) => expect(response.body).toHaveLength(24));
   });
 
@@ -32,11 +28,7 @@ describe('DriverController', () => {
       return request(app.getHttpServer())
         .get('/driver/LEC')
         .expect(200)
-        .expect((response) =>
-          expect(response.header['cache-control']).toEqual(
-            `max-age=${DURATION.ONE_HOUR}`,
-          ),
-        )
+        .expect((response) => expect(response.header['cache-control']).toEqual(`max-age=${DURATION.ONE_HOUR}`))
         .expect({
           code: 'LEC',
           firstName: 'Charles',
@@ -47,13 +39,10 @@ describe('DriverController', () => {
     });
 
     it('should return 404 statusCode', () => {
-      return request(app.getHttpServer())
-        .get('/driver/DoesNotExist')
-        .expect(404)
-        .expect({
-          statusCode: 404,
-          message: 'Not Found',
-        });
+      return request(app.getHttpServer()).get('/driver/DoesNotExist').expect(404).expect({
+        statusCode: 404,
+        message: 'Not Found',
+      });
     });
   });
 

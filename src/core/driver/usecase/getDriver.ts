@@ -12,10 +12,9 @@ export class GetDriverUsecase {
       return Result.ok(driver);
     } catch (error) {
       return Result.error(
-        new UnexpectedError(
-          'something went wrong during GetDriverUsecase execution',
-          { cause: error },
-        ),
+        new UnexpectedError('something went wrong during GetDriverUsecase execution', {
+          cause: error,
+        }),
       );
     }
   }

@@ -10,10 +10,9 @@ export class AddDriverUsecase {
     return Result.try(
       () => this.driverRepository.persist(driver),
       (error) =>
-        new UnexpectedError(
-          'something went wrong during AddDriverUsecase execution',
-          { cause: error },
-        ),
+        new UnexpectedError('something went wrong during AddDriverUsecase execution', {
+          cause: error,
+        }),
     );
   }
 }
