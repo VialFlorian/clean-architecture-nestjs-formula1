@@ -1,0 +1,19 @@
+meta {
+  name: Driver by code
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{f1BackendUrl}}/driver/:code
+  body: none
+  auth: none
+}
+
+params:path {
+  code: LEC
+}
+
+assert {
+  res.status: eq 200
+}

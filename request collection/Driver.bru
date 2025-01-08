@@ -1,0 +1,25 @@
+meta {
+  name: Driver
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{f1BackendUrl}}/driver
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "code": "FVI",
+    "firstName": "Florian",
+    "lastName": "VIAL",
+    "dateOfBirth": "1995-09-28",
+    "nationality": "French"
+  }
+}
+
+assert {
+  res.status: eq 201
+}
