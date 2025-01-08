@@ -11,16 +11,16 @@ export class DriverController {
 
   @Get()
   getAllDrivers() {
-    return this.usecases.getAllDrivers.execute();
+    return this.usecases.getAllDrivers.execute().getOrThrow();
   }
 
   @Get(':id')
   getDriver(@Param('id') code: string) {
-    return this.usecases.getDriver.execute(code);
+    return this.usecases.getDriver.execute(code).getOrThrow();
   }
 
   @Post()
   addDriver(@Body() driver: AddDriverDto) {
-    return this.usecases.addDriver.execute(driver);
+    return this.usecases.addDriver.execute(driver).getOrThrow();
   }
 }

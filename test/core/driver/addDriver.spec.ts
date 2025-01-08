@@ -19,10 +19,28 @@ describe('AddDriver Usecase', () => {
     const driver = driverFactory.build();
 
     // When
-    await usecase.execute(driver);
+    const result = await usecase.execute(driver);
 
     // Then
+    expect(result.isOk()).toEqual(true);
     expect(driverRepository.persist).toHaveBeenCalledTimes(1);
     expect(driverRepository.persist).toHaveBeenCalledWith(driver);
+  });
+
+  it('should return error of type unexpected-error', async () => {
+    // Given
+    const {
+      usecase,
+      params: { driverRepository },
+    } = setup();
+    const driver = driverFactory.build();
+    driverRepository.persist.mockRejectedValue(new Error());
+
+    // When
+    const result = await usecase.execute(driver);
+
+    // Then
+    expect(result.isOk()).toEqual(false);
+    expect(result.error?.type).toEqual('unexpected-error');
   });
 });

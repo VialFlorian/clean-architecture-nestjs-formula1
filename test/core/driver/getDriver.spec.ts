@@ -10,7 +10,7 @@ const setup = () => {
 };
 
 describe('GetDriver Usecase', () => {
-  it('should return driver from repository', async () => {
+  it('should return driver', async () => {
     // Given
     const {
       usecase,
@@ -23,6 +23,39 @@ describe('GetDriver Usecase', () => {
     const result = await usecase.execute('code');
 
     // Then
-    expect(result).toEqual(driver);
+    expect(result.isOk()).toEqual(true);
+    expect(result.value).toEqual(driver);
+  });
+
+  it('should return error of type notfound-error', async () => {
+    // Given
+    const {
+      usecase,
+      params: { driverRepository },
+    } = setup();
+    driverRepository.find.mockResolvedValue(null);
+
+    // When
+    const result = await usecase.execute('code');
+
+    // Then
+    expect(result.isOk()).toEqual(false);
+    expect(result.error?.type).toEqual('notfound-error');
+  });
+
+  it('should return error of type unexpected-error', async () => {
+    // Given
+    const {
+      usecase,
+      params: { driverRepository },
+    } = setup();
+    driverRepository.find.mockRejectedValue(new Error());
+
+    // When
+    const result = await usecase.execute('code');
+
+    // Then
+    expect(result.isOk()).toEqual(false);
+    expect(result.error?.type).toEqual('unexpected-error');
   });
 });
