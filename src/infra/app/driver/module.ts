@@ -6,23 +6,21 @@ import { GetDriverUsecase } from 'src/core/driver/usecase/getDriver';
 import { DriverRepositoryInMemory } from 'src/infra/repository/driver/inmemory';
 import { DriverController } from './controller';
 
+export type DriverUsecases = ReturnType<typeof createUsecases>;
+
+const createUsecases = (repo: DriverRepository) => ({
+  getAllDrivers: new GetAllDriversUsecase(repo),
+  getDriver: new GetDriverUsecase(repo),
+  addDriver: new AddDriverUsecase(repo),
+});
+
 @Module({
   controllers: [DriverController],
   providers: [
     { provide: DriverRepository, useClass: DriverRepositoryInMemory },
     {
-      provide: 'GetAllDriversUsecase',
-      useFactory: (repo: DriverRepository) => new GetAllDriversUsecase(repo),
-      inject: [DriverRepository],
-    },
-    {
-      provide: 'GetDriverUsecase',
-      useFactory: (repo: DriverRepository) => new GetDriverUsecase(repo),
-      inject: [DriverRepository],
-    },
-    {
-      provide: 'AddDriverUsecase',
-      useFactory: (repo: DriverRepository) => new AddDriverUsecase(repo),
+      provide: 'DriverUsecases',
+      useFactory: createUsecases,
       inject: [DriverRepository],
     },
   ],
