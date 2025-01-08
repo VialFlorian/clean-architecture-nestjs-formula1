@@ -13,3 +13,11 @@ export const throwHttpException = (
 ) => {
   throw HTTP_EXCEPTIONS_MAPPING[error.type];
 };
+
+export const DURATION = {
+  ONE_HOUR: 60 * 60,
+};
+
+export const setHttpCacheHeader = (duration: number) => {
+  return ['cache-control' as const, `max-age=${duration}` as const] as const;
+};

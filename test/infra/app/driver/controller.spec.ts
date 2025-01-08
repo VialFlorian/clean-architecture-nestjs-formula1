@@ -1,6 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { DriverModule } from 'src/infra/app/driver/module';
+import { DURATION } from 'src/infra/app/http.helper';
 import * as request from 'supertest';
 
 describe('DriverController', () => {
@@ -18,6 +19,11 @@ describe('DriverController', () => {
     return request(app.getHttpServer())
       .get('/driver')
       .expect(200)
+      .expect((response) =>
+        expect(response.header['cache-control']).toEqual(
+          `max-age=${DURATION.ONE_HOUR}`,
+        ),
+      )
       .expect((response) => expect(response.body).toHaveLength(24));
   });
 
@@ -26,6 +32,11 @@ describe('DriverController', () => {
       return request(app.getHttpServer())
         .get('/driver/LEC')
         .expect(200)
+        .expect((response) =>
+          expect(response.header['cache-control']).toEqual(
+            `max-age=${DURATION.ONE_HOUR}`,
+          ),
+        )
         .expect({
           code: 'LEC',
           firstName: 'Charles',
