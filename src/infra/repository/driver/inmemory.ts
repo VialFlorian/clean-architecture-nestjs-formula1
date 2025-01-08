@@ -10,9 +10,9 @@ type DriverModel = Omit<DriverRaw, 'driverId' | 'permanentNumber' | 'url'>;
 export class DriverRepositoryInMemory implements DriverRepository {
   private data = data.MRData.DriverTable.Drivers as DriverModel[];
 
-  find(code: string): Promise<Driver> {
+  find(code: string) {
     const driver = this.data.find((driver) => driver.code === code);
-    if (!driver) return null;
+    if (!driver) return Promise.resolve(null);
 
     return Promise.resolve({
       code: driver.code,
@@ -23,7 +23,7 @@ export class DriverRepositoryInMemory implements DriverRepository {
     });
   }
 
-  findAll(): Promise<Driver[]> {
+  findAll() {
     return Promise.resolve(
       this.data.map((driver) => ({
         code: driver.code,
@@ -35,7 +35,7 @@ export class DriverRepositoryInMemory implements DriverRepository {
     );
   }
 
-  persist(driver: Driver): Promise<void> {
+  persist(driver: Driver) {
     this.data.push({
       code: driver.code,
       givenName: driver.firstName,

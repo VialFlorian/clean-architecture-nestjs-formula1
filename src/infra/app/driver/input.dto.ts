@@ -1,4 +1,4 @@
-export class AddDriverDto {
+export interface AddDriverDto {
   code: string;
   firstName: string;
   lastName: string;
