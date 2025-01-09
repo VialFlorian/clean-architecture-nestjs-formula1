@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { DriverModule } from 'src/infra/app/driver/module';
+import { AppModule } from 'src/infra/app/app.module';
 import { DURATION } from 'src/infra/app/http.helper';
 import * as request from 'supertest';
 
@@ -9,7 +9,7 @@ describe('DriverController', () => {
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [DriverModule],
+      imports: [AppModule],
     }).compile();
     app = moduleFixture.createNestApplication();
     await app.init();
@@ -64,18 +64,27 @@ describe('DriverController', () => {
 
     it('should return 201 statusCode', () => {
       const { input } = setup();
-      return request(app.getHttpServer()).post('/driver').send(input.valid).expect(201);
+      return request(app.getHttpServer())
+        .post('/driver')
+        .set('Authorization', 'Bearer b3ZJ24IUFuoGUP')
+        .send(input.valid)
+        .expect(201);
     });
 
     it.each([
       [setup().input.withUnknownProp, "Unrecognized key(s) in object: 'unknown'"],
       [setup().input.withMissingPropCode, 'Required (code)'],
     ])('should return 400 statusCode', (input, error) => {
-      return request(app.getHttpServer()).post('/driver').send(input).expect(400).expect({
-        statusCode: 400,
-        message: 'Validation failed',
-        error,
-      });
+      return request(app.getHttpServer())
+        .post('/driver')
+        .set('Authorization', 'Bearer b3ZJ24IUFuoGUP')
+        .send(input)
+        .expect(400)
+        .expect({
+          statusCode: 400,
+          message: 'Validation failed',
+          error,
+        });
     });
   });
 });
