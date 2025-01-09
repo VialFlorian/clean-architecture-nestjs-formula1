@@ -19,7 +19,7 @@ describe('AddDriver Usecase', () => {
     const driver = driverFactory.build();
 
     // When
-    const result = await usecase.execute(driver);
+    const result = await usecase.execute({ driver });
 
     // Then
     expect(result.isOk()).toEqual(true);
@@ -37,7 +37,7 @@ describe('AddDriver Usecase', () => {
     driverRepository.persist.mockRejectedValue(new Error());
 
     // When
-    const result = await usecase.execute(driver);
+    const result = await usecase.execute({ driver });
 
     // Then
     expect(result.isOk()).toEqual(false);

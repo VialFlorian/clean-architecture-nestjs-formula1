@@ -1,18 +1,16 @@
-import { UnexpectedError } from 'src/core/usecase.errors';
+import { Usecase, UsecaseResult } from 'src/core/usecase.decorator';
 import { Result } from 'typescript-result';
 import { Driver } from '../entity';
 import { DriverRepository } from '../repository';
 
+type Params = { driver: Driver };
+
 export class AddDriverUsecase {
   constructor(private readonly driverRepository: DriverRepository) {}
 
-  execute(driver: Driver) {
-    return Result.try(
-      () => this.driverRepository.persist(driver),
-      (error) =>
-        new UnexpectedError('something went wrong during AddDriverUsecase execution', {
-          cause: error,
-        }),
-    );
+  @Usecase()
+  async execute({ driver }: Params): UsecaseResult<void> {
+    await this.driverRepository.persist(driver);
+    return Result.ok();
   }
 }

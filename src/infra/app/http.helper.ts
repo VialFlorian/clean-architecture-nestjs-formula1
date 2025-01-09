@@ -6,6 +6,7 @@ const HTTP_EXCEPTIONS_MAPPING = {
 };
 
 export const throwHttpException = (error: Error & { type: keyof typeof HTTP_EXCEPTIONS_MAPPING }) => {
+  console.log(error);
   throw HTTP_EXCEPTIONS_MAPPING[error.type];
 };
 

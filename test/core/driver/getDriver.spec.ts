@@ -20,7 +20,7 @@ describe('GetDriver Usecase', () => {
     driverRepository.find.mockResolvedValue(driver);
 
     // When
-    const result = await usecase.execute('code');
+    const result = await usecase.execute({ code: 'code' });
 
     // Then
     expect(result.isOk()).toEqual(true);
@@ -36,7 +36,7 @@ describe('GetDriver Usecase', () => {
     driverRepository.find.mockResolvedValue(null);
 
     // When
-    const result = await usecase.execute('code');
+    const result = await usecase.execute({ code: 'code' });
 
     // Then
     expect(result.isOk()).toEqual(false);
@@ -52,7 +52,7 @@ describe('GetDriver Usecase', () => {
     driverRepository.find.mockRejectedValue(new Error());
 
     // When
-    const result = await usecase.execute('code');
+    const result = await usecase.execute({ code: 'code' });
 
     // Then
     expect(result.isOk()).toEqual(false);
