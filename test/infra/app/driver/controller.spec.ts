@@ -46,16 +46,36 @@ describe('DriverController', () => {
     });
   });
 
-  it('POST /driver', () => {
-    return request(app.getHttpServer())
-      .post('/driver')
-      .send({
+  describe('POST /driver', () => {
+    const setup = () => {
+      const valid = {
         code: 'FVI',
         firstName: 'Florian',
         lastName: 'VIAL',
         dateOfBirth: '1995-09-28',
         nationality: 'French',
-      })
-      .expect(201);
+      };
+
+      const withUnknownProp = { ...valid, unknown: 'unknown' };
+      const { code, ...withMissingPropCode } = valid; // eslint-disable-line
+
+      return { input: { valid, withMissingPropCode, withUnknownProp } };
+    };
+
+    it('should return 201 statusCode', () => {
+      const { input } = setup();
+      return request(app.getHttpServer()).post('/driver').send(input.valid).expect(201);
+    });
+
+    it.each([
+      [setup().input.withUnknownProp, "Unrecognized key(s) in object: 'unknown'"],
+      [setup().input.withMissingPropCode, 'Required (code)'],
+    ])('should return 400 statusCode', (input, error) => {
+      return request(app.getHttpServer()).post('/driver').send(input).expect(400).expect({
+        statusCode: 400,
+        message: 'Validation failed',
+        error,
+      });
+    });
   });
 });

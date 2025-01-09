@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Header, HttpCode, Inject, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Header, HttpCode, Inject, Param, Post, UsePipes } from '@nestjs/common';
 import { DURATION, setHttpCacheHeader, throwHttpException } from '../http.helper';
-import { AddDriverDto } from './input.dto';
+import { ZodValidationPipe } from '../pipe.helper';
+import { AddDriverDto, createAddDriverSchema } from './input.dto';
 import { DriverUsecases } from './module';
 
 @Controller('driver')
@@ -25,6 +26,7 @@ export class DriverController {
   }
 
   @Post()
+  @UsePipes(new ZodValidationPipe(createAddDriverSchema))
   @HttpCode(201)
   addDriver(@Body() driver: AddDriverDto) {
     return this.usecases.addDriver.execute(driver).getOrElse(throwHttpException);
