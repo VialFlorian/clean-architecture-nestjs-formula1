@@ -1,12 +1,10 @@
-import { Injectable } from '@nestjs/common';
 import { Driver } from 'src/core/driver/entity';
 import { DriverRepository } from 'src/core/driver/repository';
-import * as data from './__data__.json';
+import * as data from '../../datasources/inmemory/__driver__.json';
 
 type DriverRaw = (typeof data)['MRData']['DriverTable']['Drivers'][0];
 type DriverModel = Omit<DriverRaw, 'driverId' | 'permanentNumber' | 'url'>;
 
-@Injectable()
 export class DriverRepositoryInMemory implements DriverRepository {
   private data = data.MRData.DriverTable.Drivers as DriverModel[];
 

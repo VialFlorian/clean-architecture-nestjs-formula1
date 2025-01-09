@@ -9,7 +9,7 @@ describe('DriverController', () => {
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule.forRoot({ repository: 'inmemory' })],
     }).compile();
     app = moduleFixture.createNestApplication();
     await app.init();

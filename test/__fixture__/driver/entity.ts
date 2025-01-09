@@ -4,12 +4,15 @@ import { generateRandomString, getRandomValueFromArray } from '../utils';
 
 const generateRandomStringDate = () => getRandomValueFromArray(['1996-03-23', '1981-07-29', '2005-05-08']);
 
-const generateRandomNationality = () => getRandomValueFromArray(['French', 'Thai', 'Spanish', 'British']);
+const generateRandomNationality = () => getRandomValueFromArray(['france', 'thailand', 'spain', 'united-kingdom']);
 
-export const driverFactory = Factory.define<Driver>(() => ({
-  code: generateRandomString(3),
-  firstName: generateRandomString(),
-  lastName: generateRandomString(),
-  dateOfBirth: generateRandomStringDate(),
-  nationality: generateRandomNationality(),
-}));
+export const driverFactory = Factory.define<Driver>(() => {
+  const lastName = generateRandomString();
+  return {
+    code: lastName.slice(0, 3).toUpperCase(),
+    firstName: generateRandomString(),
+    lastName,
+    dateOfBirth: generateRandomStringDate(),
+    nationality: generateRandomNationality(),
+  };
+});
