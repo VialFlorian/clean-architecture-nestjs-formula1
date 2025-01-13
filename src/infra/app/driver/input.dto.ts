@@ -1,15 +1,14 @@
-import { createZodDto } from 'nestjs-zod';
-import { z } from 'zod';
+import { type Static, Type } from '@sinclair/typebox';
 
-export const createAddDriverSchema = z
-  .object({
-    code: z.string(),
-    firstName: z.string(),
-    lastName: z.string(),
-    dateOfBirth: z.string(),
-    nationality: z.string(),
-  })
-  .required()
-  .strict();
+export const AddDriverBodySchema = Type.Object(
+  {
+    code: Type.String(),
+    firstName: Type.String(),
+    lastName: Type.String(),
+    dateOfBirth: Type.String(),
+    nationality: Type.String(),
+  },
+  { additionalProperties: false },
+);
 
-export class AddDriverDto extends createZodDto(createAddDriverSchema) {}
+export type AddDriverBodyDto = Static<typeof AddDriverBodySchema>;

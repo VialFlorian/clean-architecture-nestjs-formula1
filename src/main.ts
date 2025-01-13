@@ -1,16 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { patchNestJsSwagger } from 'nestjs-zod';
+import { configureNestJsTypebox } from 'nestjs-typebox';
 import { AppModule } from './infra/app/app.module';
+
+configureNestJsTypebox({ patchSwagger: true });
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule.forRoot({ repository: 'prisma' }),
     new FastifyAdapter(),
   );
-
-  patchNestJsSwagger();
 
   const config = new DocumentBuilder()
     .setTitle('Formula 1 API')

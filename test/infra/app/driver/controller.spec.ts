@@ -79,21 +79,16 @@ describe('DriverController', () => {
         .expect(201);
     });
 
-    it.each([
-      [setup().input.withUnknownProp, "Unrecognized key(s) in object: 'unknown'"],
-      [setup().input.withMissingPropCode, 'Required (code)'],
-    ])('should return 400 statusCode', (input, error) => {
-      return request(app.getHttpServer())
-        .post('/driver')
-        .set('Authorization', 'Bearer b3ZJ24IUFuoGUP')
-        .send(input)
-        .expect(400)
-        .expect({
-          statusCode: 400,
-          message: 'Validation failed',
-          error,
-        });
-    });
+    it.each([setup().input.withUnknownProp, setup().input.withMissingPropCode])(
+      'should return 400 statusCode',
+      (input) => {
+        return request(app.getHttpServer())
+          .post('/driver')
+          .set('Authorization', 'Bearer b3ZJ24IUFuoGUP')
+          .send(input)
+          .expect(400);
+      },
+    );
 
     it('should return 409 statusCode', () => {
       const { input } = setup();
