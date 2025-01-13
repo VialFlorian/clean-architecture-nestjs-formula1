@@ -4,9 +4,22 @@ import { PrismaService } from 'src/infra/datasources/prisma/prisma.service';
 
 export class DriverRepositoryPrisma implements DriverRepository {
   constructor(private readonly prisma: PrismaService) {}
-
   async find(code: string) {
     const rows = await this.prisma.driver.findMany({ where: { abbreviation: code } });
+    if (!rows[0]) return null;
+
+    return {
+      code: rows[0].abbreviation,
+      firstName: rows[0].first_name,
+      lastName: rows[0].last_name,
+      dateOfBirth: rows[0].date_of_birth.toString(),
+      nationality: rows[0].nationality_country_id,
+    };
+  }
+
+  async findByName(firstName: string, lastName: string): Promise<Driver | null> {
+    const id = `${firstName.toLowerCase()}-${lastName.toLowerCase()}`;
+    const rows = await this.prisma.driver.findMany({ where: { id } });
     if (!rows[0]) return null;
 
     return {

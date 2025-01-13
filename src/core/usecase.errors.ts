@@ -9,3 +9,7 @@ export class UnexpectedError extends UseCaseError {
 export class NotFoundError extends UseCaseError {
   readonly type = 'notfound-error';
 }
+
+export class ExistsError extends UseCaseError {
+  readonly type = 'exists-error';
+}

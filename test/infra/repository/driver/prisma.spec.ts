@@ -39,6 +39,25 @@ describe('DriverRepositoryPrisma', () => {
     });
   });
 
+  it('findByName', async () => {
+    // Given
+    const { repository } = setup();
+    const firstName = 'Fernando';
+    const lastName = 'Alonso';
+
+    // When
+    const result = await repository.findByName(firstName, lastName);
+
+    // Then
+    expect(result).toEqual({
+      code: 'ALO',
+      firstName: 'Fernando',
+      lastName: 'Alonso',
+      dateOfBirth: 'Wed Jul 29 1981 02:00:00 GMT+0200 (heure d’été d’Europe centrale)',
+      nationality: 'spain',
+    });
+  });
+
   it('persist', async () => {
     // Given
     const { repository } = setup();

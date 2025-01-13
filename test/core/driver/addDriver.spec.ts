@@ -27,6 +27,23 @@ describe('AddDriver Usecase', () => {
     expect(driverRepository.persist).toHaveBeenCalledWith(driver);
   });
 
+  it('should return error of type exists-error', async () => {
+    // Given
+    const {
+      usecase,
+      params: { driverRepository },
+    } = setup();
+    const driver = driverFactory.build();
+    driverRepository.findByName.mockResolvedValue(driver);
+
+    // When
+    const result = await usecase.execute({ driver });
+
+    // Then
+    expect(result.isOk()).toEqual(false);
+    expect(result.error?.type).toEqual('exists-error');
+  });
+
   it('should return error of type unexpected-error', async () => {
     // Given
     const {

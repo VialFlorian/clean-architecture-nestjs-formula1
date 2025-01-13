@@ -35,6 +35,25 @@ describe('DriverRepositoryInMemory', () => {
     });
   });
 
+  it('findByName', async () => {
+    // Given
+    const { repository } = setup();
+    const firstName = 'Lewis';
+    const lastName = 'Hamilton';
+
+    // When
+    const result = await repository.findByName(firstName, lastName);
+
+    // Then
+    expect(result).toEqual({
+      code: 'HAM',
+      firstName: 'Lewis',
+      lastName: 'Hamilton',
+      dateOfBirth: '1985-01-07',
+      nationality: 'British',
+    });
+  });
+
   it('persist', async () => {
     // Given
     const { repository } = setup();

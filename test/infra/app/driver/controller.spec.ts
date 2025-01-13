@@ -56,10 +56,18 @@ describe('DriverController', () => {
         nationality: 'French',
       };
 
+      const alreadyExists = {
+        code: 'LEC',
+        firstName: 'Charles',
+        lastName: 'Leclerc',
+        dateOfBirth: '1997-10-16',
+        nationality: 'Monegasque',
+      };
+
       const withUnknownProp = { ...valid, unknown: 'unknown' };
       const { code, ...withMissingPropCode } = valid; // eslint-disable-line
 
-      return { input: { valid, withMissingPropCode, withUnknownProp } };
+      return { input: { valid, withMissingPropCode, withUnknownProp, alreadyExists } };
     };
 
     it('should return 201 statusCode', () => {
@@ -84,6 +92,19 @@ describe('DriverController', () => {
           statusCode: 400,
           message: 'Validation failed',
           error,
+        });
+    });
+
+    it('should return 409 statusCode', () => {
+      const { input } = setup();
+      return request(app.getHttpServer())
+        .post('/driver')
+        .set('Authorization', 'Bearer b3ZJ24IUFuoGUP')
+        .send(input.alreadyExists)
+        .expect(409)
+        .expect({
+          statusCode: 409,
+          message: 'Already Exists',
         });
     });
   });
