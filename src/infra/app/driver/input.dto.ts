@@ -1,3 +1,4 @@
+import { createZodDto } from 'nestjs-zod';
 import { z } from 'zod';
 
 export const createAddDriverSchema = z
@@ -11,4 +12,4 @@ export const createAddDriverSchema = z
   .required()
   .strict();
 
-export type AddDriverDto = z.infer<typeof createAddDriverSchema>;
+export class AddDriverDto extends createZodDto(createAddDriverSchema) {}

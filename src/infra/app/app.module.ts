@@ -1,6 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_PIPE } from '@nestjs/core';
+import { ZodValidationPipe } from 'nestjs-zod';
 import { DriverModule } from './driver/module';
 import { RolesGuard } from './roles.helper';
 
@@ -24,6 +25,10 @@ export class AppModule {
         {
           provide: APP_GUARD,
           useClass: RolesGuard,
+        },
+        {
+          provide: APP_PIPE,
+          useClass: ZodValidationPipe,
         },
       ],
     };
