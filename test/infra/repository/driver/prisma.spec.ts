@@ -34,7 +34,7 @@ describe('DriverRepositoryPrisma', () => {
       code: 'ALO',
       firstName: 'Fernando',
       lastName: 'Alonso',
-      dateOfBirth: 'Wed Jul 29 1981 02:00:00 GMT+0200 (heure d’été d’Europe centrale)',
+      dateOfBirth: expect.stringContaining('Wed Jul 29 1981 02:00:00 GMT+0200'),
       nationality: 'spain',
     });
   });
@@ -53,7 +53,7 @@ describe('DriverRepositoryPrisma', () => {
       code: 'ALO',
       firstName: 'Fernando',
       lastName: 'Alonso',
-      dateOfBirth: 'Wed Jul 29 1981 02:00:00 GMT+0200 (heure d’été d’Europe centrale)',
+      dateOfBirth: expect.stringContaining('Wed Jul 29 1981 02:00:00 GMT+0200'),
       nationality: 'spain',
     });
   });
