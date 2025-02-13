@@ -4,9 +4,9 @@ import { Type } from '@sinclair/typebox';
 import { Validate } from 'nestjs-typebox';
 import { DURATION, setHttpCacheHeader, throwHttpException } from '../../http.helper';
 import { Roles } from '../../roles.helper';
+import { AddDriverBodySchema, AddDriverBodyDto } from '../input.dto';
 import { DriverUsecases } from '../module';
-import { AddDriverBodySchema, AddDriverBodyDto } from './input.dto';
-import { DriverResponseSchema } from './output.dto';
+import { DriverResponseSchema } from '../output.dto';
 
 @Controller('driver')
 export class DriverController {

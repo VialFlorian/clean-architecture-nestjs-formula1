@@ -1,8 +1,8 @@
 import { Inject } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { throwHttpException } from '../../http.helper';
+import { AddDriverBodyDto } from '../input.dto';
 import { DriverUsecases } from '../module';
-import { AddDriverBodyDto } from '../rest/input.dto';
 
 @Resolver()
 export class DriverResolver {
