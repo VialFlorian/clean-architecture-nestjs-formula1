@@ -25,7 +25,7 @@ export class AppModule {
           driver: ApolloDriver,
           typePaths: ['./**/*.graphql'],
           definitions: {
-            path: join(process.cwd(), 'src/graphql.ts'),
+            path: join(process.cwd(), 'src/infra/frameworks/graphql/definitions.ts'),
             outputAs: 'class',
           },
         }),

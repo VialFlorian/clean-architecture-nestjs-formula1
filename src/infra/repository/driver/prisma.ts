@@ -1,6 +1,6 @@
 import { Driver } from 'src/core/driver/entity';
 import { DriverRepository } from 'src/core/driver/repository';
-import { PrismaService } from 'src/infra/datasources/prisma/prisma.service';
+import { PrismaService } from 'src/infra/frameworks/prisma/prisma.service';
 
 export class DriverRepositoryPrisma implements DriverRepository {
   constructor(private readonly prisma: PrismaService) {}

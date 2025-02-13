@@ -2,10 +2,10 @@ import { Controller, Get, Header, HttpCode, Inject, Post } from '@nestjs/common'
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { Type } from '@sinclair/typebox';
 import { Validate } from 'nestjs-typebox';
-import { DURATION, setHttpCacheHeader, throwHttpException } from '../http.helper';
-import { Roles } from '../roles.helper';
+import { DURATION, setHttpCacheHeader, throwHttpException } from '../../http.helper';
+import { Roles } from '../../roles.helper';
+import { DriverUsecases } from '../module';
 import { AddDriverBodySchema, AddDriverBodyDto } from './input.dto';
-import { DriverUsecases } from './module';
 import { DriverResponseSchema } from './output.dto';
 
 @Controller('driver')

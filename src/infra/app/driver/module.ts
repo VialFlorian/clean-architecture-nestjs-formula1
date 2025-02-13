@@ -3,11 +3,11 @@ import { DriverRepository } from 'src/core/driver/repository';
 import { AddDriverUsecase } from 'src/core/driver/usecase/addDriver';
 import { GetAllDriversUsecase } from 'src/core/driver/usecase/getAllDrivers';
 import { GetDriverUsecase } from 'src/core/driver/usecase/getDriver';
-import { PrismaService } from 'src/infra/datasources/prisma/prisma.service';
+import { PrismaService } from 'src/infra/frameworks/prisma/prisma.service';
 import { DriverRepositoryInMemory } from 'src/infra/repository/driver/inmemory';
 import { DriverRepositoryPrisma } from 'src/infra/repository/driver/prisma';
-import { DriverController } from './controller';
-import { DriverResolver } from './resolver';
+import { DriverResolver } from './graphql/resolver';
+import { DriverController } from './rest/controller';
 
 export type DriverUsecases = ReturnType<typeof createUsecases>;
 

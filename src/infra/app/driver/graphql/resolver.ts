@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { throwHttpException } from '../http.helper.js';
-import { DriverUsecases } from './module';
+import { throwHttpException } from '../../http.helper';
+import { DriverUsecases } from '../module';
 
 @Resolver()
 export class DriverResolver {

@@ -1,6 +1,6 @@
 import { join } from 'path';
 import * as dotenv from 'dotenv';
-import { PrismaService } from 'src/infra/datasources/prisma/prisma.service';
+import { PrismaService } from 'src/infra/frameworks/prisma/prisma.service';
 import { DriverRepositoryPrisma } from 'src/infra/repository/driver/prisma';
 import { driverFactory } from 'test/__fixture__/driver/entity';
 
