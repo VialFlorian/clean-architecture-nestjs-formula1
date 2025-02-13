@@ -1,0 +1,11 @@
+type Driver {
+  code: String
+  firstName: String
+  lastName: String
+  dateOfBirth: String
+  nationality: String
+}
+
+type Query {
+  driver(code: String): Driver
+}

@@ -7,6 +7,7 @@ import { PrismaService } from 'src/infra/datasources/prisma/prisma.service';
 import { DriverRepositoryInMemory } from 'src/infra/repository/driver/inmemory';
 import { DriverRepositoryPrisma } from 'src/infra/repository/driver/prisma';
 import { DriverController } from './controller';
+import { DriverResolver } from './resolver';
 
 export type DriverUsecases = ReturnType<typeof createUsecases>;
 
@@ -42,6 +43,7 @@ export class DriverModule {
           useFactory: createUsecases,
           inject: [DriverRepository],
         },
+        DriverResolver,
       ],
     };
   }
