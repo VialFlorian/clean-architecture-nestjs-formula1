@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { configureNestJsTypebox } from 'nestjs-typebox';
-import { AppModule } from './infra/app/app.module';
+import { AppModule } from './infra/frameworks/nestjs/app.module';
 
 configureNestJsTypebox({ patchSwagger: true });
 

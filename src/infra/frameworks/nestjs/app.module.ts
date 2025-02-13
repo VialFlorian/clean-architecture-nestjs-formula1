@@ -4,8 +4,8 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
-import { DriverModule } from './driver/module';
-import { RolesGuard } from './roles.helper';
+import { DriverModule } from '../../app/driver/module';
+import { RolesGuard } from '../../app/roles.helper';
 
 interface AppModuleConfig {
   repository: 'prisma' | 'inmemory';

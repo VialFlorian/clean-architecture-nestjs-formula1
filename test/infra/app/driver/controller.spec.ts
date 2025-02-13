@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppModule } from 'src/infra/app/app.module';
 import { DURATION } from 'src/infra/app/http.helper';
+import { AppModule } from 'src/infra/frameworks/nestjs/app.module';
 import * as request from 'supertest';
 
 describe('DriverController', () => {
