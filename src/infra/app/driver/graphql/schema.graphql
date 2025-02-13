@@ -10,3 +10,15 @@ type Query {
   driver(code: String): Driver
   drivers: [Driver!]!
 }
+
+input DriverInput {
+  code: String
+  firstName: String
+  lastName: String
+  dateOfBirth: String
+  nationality: String
+}
+
+type Mutation {
+  addDriver(driver: DriverInput): String
+}
