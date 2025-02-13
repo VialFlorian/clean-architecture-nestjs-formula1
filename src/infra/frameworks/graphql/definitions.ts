@@ -18,6 +18,8 @@ export class Driver {
 
 export abstract class IQuery {
     abstract driver(code?: Nullable<string>): Nullable<Driver> | Promise<Nullable<Driver>>;
+
+    abstract drivers(): Driver[] | Promise<Driver[]>;
 }
 
 type Nullable<T> = T | null;

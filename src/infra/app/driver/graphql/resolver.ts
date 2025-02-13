@@ -15,4 +15,10 @@ export class DriverResolver {
     const result = await this.usecases.getDriver.execute({ code });
     return result.getOrElse(throwHttpException);
   }
+
+  @Query()
+  async drivers() {
+    const result = await this.usecases.getAllDrivers.execute();
+    return result.getOrElse(throwHttpException);
+  }
 }

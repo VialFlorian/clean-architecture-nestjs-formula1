@@ -8,4 +8,5 @@ type Driver {
 
 type Query {
   driver(code: String): Driver
+  drivers: [Driver!]!
 }
